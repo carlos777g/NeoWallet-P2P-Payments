@@ -24,6 +24,8 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await testPool.end();
+  // Close the pool the app itself opened, otherwise Jest reports a leaked handle
+  await require('../src/db/connection').end();
 });
 
 // --- GET /accounts/:id ---
